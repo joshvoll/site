@@ -16,18 +16,32 @@ Some content here, so
 interesting, you just
 want to keep reading.`)
 
+var mark = []byte(`---
+title: The Beautiful in the Ugly
+date: 2018-04-23
+authors: 
+   - Silver
+---
+
+# The Beautiful in the Ugly
+
+Functional programming is nice and all, but sometimes you just need to have
+things get done regardless of the consequences. Sometimes a dirty little hack
+will suffice in place of a branching construct. This is a story of one of these
+times.`)
+
 type article struct {
 	Title   string
 	Authors []string
 }
 
-// TestFrontParse is going to parse the
-func TestFrontParse(t *testing.T) {
+func TestMardownParse(t *testing.T) {
 	var a article
-	content, err := Unmarshal(markdown, &a)
+	content, err := Unmarshal(mark, &a)
 	if err != nil {
-		t.Errorf("generating error: %v ", err)
+		t.Fatalf("cannot unmarshal de conentn: %v ", err)
 	}
 	fmt.Printf("%#v\n", a)
-	fmt.Printf("%s\n", string(content))
+	fmt.Printf("%s\n", content)
+
 }
